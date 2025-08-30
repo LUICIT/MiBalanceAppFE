@@ -1,0 +1,90 @@
+{
+  "FORMS": {
+    "LOGIN": {
+      "TITLE": "Iniciar sesión",
+      "REDIRECT_REGISTER": "¿No tienes una cuenta? ¡Regístrese ahora!",
+      "EMAIL": "Correo electrónico",
+      "PASSWORD": "Contraseña",
+      "REMEMBER_ME": "Recuérdame",
+      "FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
+      "LANGUAGE": "Idioma"
+    },
+    "REGISTER": {
+      "TITLE": "Registro",
+      "REDIRECT_LOGIN": "¿Ya tienes una cuenta? Iniciar sesión",
+      "NAMES": "Nombre(s)",
+      "FATHER_NAME": "Apellido paterno",
+      "MOTHER_NAME": "Apellido materno",
+      "BIRTHDAY": "Fecha de nacimiento",
+      "EMAIL": "Correo electrónico",
+      "PASSWORD": "Contraseña",
+      "CONFIRM_PASSWORD": "Confirmar contraseña",
+      "LANGUAGE": "Idioma"
+    }
+  },
+  "BTN": {
+    "LOGIN": "Iniciar sesión",
+    "REGISTER": "Registrarse",
+    "ADD": "Agregar",
+    "SAVE": "Guardar",
+    "SUBMIT": "Enviar",
+    "CANCEL": "Cancelar",
+    "UPLOAD": "Subir",
+    "REMOVE": "Eliminar",
+    "YES": "Sí",
+    "NO": "No",
+    "OK": "Aceptar",
+    "CLEAR": "Limpiar",
+    "ADVANCED": "Avanzado",
+    "HIDE": "Ocultar"
+  },
+  "VALIDATION": {
+    "REQUIRED": "Este campo es obligatorio.",
+    "INVALID_EMAIL": "Correo electrónico inválido.",
+    "MIN_LENGTH": "Este campo debe ser al menos {{min}} caracteres.",
+    "MAX_LENGTH": "La longitud máxima es de {{max}} caracteres.",
+    "ALPHABETIC": "Este campo solo debe contener letras.",
+    "ALPHANUMERIC": "Este campo solo debe contener letras y números.",
+    "NUMERIC": "Este campo solo debe contener números.",
+    "PASSWORD_MISMATCH": "La contraseña no coincide.",
+    "INVALID_URL": "URL inválida.",
+    "INVALID_NUMBER": "Número inválido."
+  },
+  "MESSAGE": {
+    "PAGE_NOT_EXIST": "Opps, parece que esta página no existe.",
+    "SURE_DELETE": "¿Estás seguro de que deseas eliminar?"
+  },
+  "LOGIN": "Iniciar sesión",
+  "LOGOUT": "Cerrar sesión",
+  "REGISTER": "Registrarse",
+  "ACCOUNT": "Cuenta",
+  "SUBMIT_PROPERTY": "Enviar propiedad",
+  "MENU": "Menú",
+  "MY_PROPERTIES": "Mis propiedades",
+  "FAVORITES": "Favoritos",
+  "COMPARE": "Comparar",
+  "EDIT_PROFILE": "Editar perfil",
+  "LOCK_SCREEN": "Bloquear pantalla",
+  "HELP": "Ayuda",
+  "NAV": {
+    "HOME": "Inicio",
+    "PROPERTIES": "Propiedades",
+    "PAGES": "Páginas",
+    "AGENTS": "Agentes",
+    "AGENT": "Agente",
+    "FAQS": "Preguntas frecuentes",
+    "PRICING": "Precios",
+    "TERMS_CONDITIONS": "Términos y condiciones",
+    "LANDING": "Página principal",
+    "404_PAGE": "Página 404",
+    "OTHERS": "Otros",
+    "EXTERNAL_LINK": "Enlace externo",
+    "MENU_ITEM": "Elemento de menú",
+    "CONTACT": "Contacto",
+    "ABOUT_US": "Sobre nosotros",
+    "ADMIN": "Administrador"
+  },
+  "FIELD": {
+    "NAME": "Nombre"
+  }
+}

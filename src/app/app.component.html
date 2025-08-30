@@ -1,0 +1,8 @@
+<div id="app"
+     class="app"
+     [ngClass]="[settings.theme, 'toolbar-'+settings.toolbar]"
+     [class.main-toolbar-fixed]="settings.mainToolbarFixed">
+    <router-outlet />
+    <ng-progress #progressBar="ngProgress" ngProgressHttp/>
+    <!--<ng-progress [spinner]="false" [meteor]="false" color="#e91e63"></ng-progress>-->
+</div>

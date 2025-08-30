@@ -1,0 +1,65 @@
+<mat-card [style.max-width.px]="500" class="p-3">
+    <div fxLayout="column" fxLayoutAlign="center center" class="text-center">
+        <h1 class="uppercase">{{ 'FORMS.LOGIN.TITLE' | translate }}</h1>
+        <a mat-button routerLink="/register" color="accent" class="w-100">
+            {{ 'FORMS.LOGIN.REDIRECT_REGISTER' | translate }}
+        </a>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+        <mat-form-field appearance="outline" class="w-100 mt-2">
+            <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+            <mat-label>{{ 'FORMS.LOGIN.EMAIL' | translate }}</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-error>
+                @if (loginForm.controls.email.errors?.required) {
+                    {{ 'VALIDATION.REQUIRED' | translate }}
+                }
+                @if (loginForm.controls.email.hasError('email')) {
+                    {{ 'VALIDATION.INVALID_EMAIL' | translate }}
+                }
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 mt-1">
+            <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+            <mat-label>{{ 'FORMS.LOGIN.PASSWORD' | translate }}</mat-label>
+            <input matInput placeholder="Password" formControlName="password" required
+                   [type]="hide ? 'password' : 'text'">
+            <mat-error>
+                @if (loginForm.controls.password.errors?.required) {
+                    {{ 'VALIDATION.REQUIRED' | translate }}
+                }
+                @if (loginForm.controls.password.hasError('minlength')) {
+                    {{ 'VALIDATION.MIN_LENGTH' | translate:{min: 8} }}
+                }
+            </mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" type="button" class="text-muted">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="rememberMe" class="my-2">{{ 'FORMS.LOGIN.REMEMBER_ME' | translate }}</mat-slide-toggle>
+        <div class="text-center mt-2">
+            <button mat-raised-button color="accent" class="uppercase" type="submit">
+                {{ 'BTN.LOGIN' | translate }}
+            </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-3">
+            <div class="divider w-100"></div>
+            <h3 class="text-muted ws-nowrap fw-500 p-2">{{ 'FORMS.LOGIN.LANGUAGE' | translate }}</h3>
+            <div class="divider w-100"></div>
+        </div>
+        <div class="text-center py-3">
+            <button mat-mini-fab color="primary" type="button">
+                Es
+            </button>
+            <button mat-mini-fab color="primary" type="button" class="mx-3">
+                En
+            </button>
+        </div>
+    </form>
+    <mat-card-actions fxLayoutAlign="end center">
+        <button mat-button>
+            <mat-icon class="text-muted">vpn_key</mat-icon>
+            <span class="mx-1">{{ 'FORMS.LOGIN.FORGOT_PASSWORD' | translate }}</span>
+        </button>
+    </mat-card-actions>
+</mat-card>

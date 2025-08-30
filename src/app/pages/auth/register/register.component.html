@@ -1,0 +1,133 @@
+<mat-card [style.max-width.px]="650" class="p-3">
+    <div fxLayout="column" fxLayoutAlign="center center" class="text-center">
+        <h1 class="uppercase">{{ 'FORMS.REGISTER.TITLE' | translate }}</h1>
+        <a mat-button routerLink="/login" color="accent" class="w-100">
+            {{ 'FORMS.REGISTER.REDIRECT_LOGIN' | translate }}
+        </a>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
+        <div fxLayout="row wrap">
+            <div fxFlex="100" fxFlex.gt-sm="100" class="pr-1">
+                <mat-form-field  appearance="outline" class="w-100">
+                    <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                    <mat-label>{{ 'FORMS.REGISTER.NAMES' | translate }}</mat-label>
+                    <input matInput formControlName="names" required>
+                    <mat-error>
+                        @if (registerForm.controls.names.errors?.required) {
+                            {{ 'VALIDATION.REQUIRED' | translate }}
+                        }
+                        @if (registerForm.controls.names.hasError('maxLength')) {
+                            {{ 'VALIDATION.MAX_LENGTH' | translate:{max: 100} }}
+                        }
+                        @if (registerForm.controls.names.hasError('validateAlphabetic')) {
+                            {{ 'VALIDATION.ALPHABETIC' | translate }}
+                        }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="50" class="pr-1">
+                <mat-form-field  appearance="outline" class="w-100">
+                    <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                    <mat-label>{{ 'FORMS.REGISTER.FATHER_NAME' | translate }}</mat-label>
+                    <input matInput formControlName="fatherSurname" required>
+                    <mat-error>
+                        @if (registerForm.controls.fatherSurname.errors?.required) {
+                            {{ 'VALIDATION.REQUIRED' | translate }}
+                        }
+                        @if (registerForm.controls.fatherSurname.hasError('maxLength')) {
+                            {{ 'VALIDATION.MAX_LENGTH' | translate:{max: 50} }}
+                        }
+                        @if (registerForm.controls.fatherSurname.hasError('validateAlphabetic')) {
+                            {{ 'VALIDATION.ALPHABETIC' | translate }}
+                        }
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field  appearance="outline" class="w-100">
+                    <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                    <mat-label>{{ 'FORMS.REGISTER.MOTHER_NAME' | translate }}</mat-label>
+                    <input matInput formControlName="motherSurname">
+                    <mat-error>
+                        @if (registerForm.controls.motherSurname.hasError('maxLength')) {
+                            {{ 'VALIDATION.MAX_LENGTH' | translate:{max: 50} }}
+                        }
+                        @if (registerForm.controls.motherSurname.hasError('validateAlphabetic')) {
+                            {{ 'VALIDATION.ALPHABETIC' | translate }}
+                        }
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field  appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.BIRTHDAY' | translate }}</mat-label>
+                <input matInput formControlName="birthday" required>
+                <mat-error>
+                    @if (registerForm.controls.birthday.errors?.required) {
+                        {{ 'VALIDATION.REQUIRED' | translate }}
+                    }
+                </mat-error>
+            </mat-form-field>
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="50" class="pl-1">
+                <mat-form-field  appearance="outline" class="w-100">
+                    <mat-icon matPrefix class="mr-1 text-muted">email</mat-icon>
+                    <mat-label>{{ 'FORMS.REGISTER.EMAIL' | translate }}</mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-error>
+                        @if (registerForm.controls.email.errors?.required) {
+                            {{ 'VALIDATION.REQUIRED' | translate }}
+                        }
+                        @if (registerForm.controls.email.hasError('invalidEmail')) {
+                            Invalid email address
+                        }
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field  appearance="outline" class="w-100">
+                    <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                    <mat-label>{{ 'FORMS.REGISTER.PASSWORD' | translate }}</mat-label>
+                    <input matInput formControlName="password" type="password" minlength="8" required [type]="hide ? 'password' : 'text'">
+                    <mat-error>
+                        @if (registerForm.controls.password.errors?.required) {
+                            {{ 'VALIDATION.REQUIRED' | translate }}
+                        }
+                        @if (registerForm.controls.password.hasError('minlength')) {
+                            {{ 'VALIDATION.MIN_LENGTH' | translate:{min: 8} }}
+                        }
+                    </mat-error>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" type="button" class="text-muted">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field  appearance="outline" class="w-100">
+                    <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                    <mat-label>{{ 'FORMS.REGISTER.CONFIRM_PASSWORD' | translate }}</mat-label>
+                    <input matInput formControlName="password_confirmation" type="password" required [type]="hide ? 'password' : 'text'">
+                    <mat-error>
+                        @if (registerForm.controls.password_confirmation.hasError('matchPassword')) {
+                            {{ 'VALIDATION.PASSWORD_MISMATCH' | translate }}
+                        }
+                    </mat-error>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" type="button" class="text-muted">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="text-center mt-2">
+            <button mat-raised-button color="accent" class="uppercase" type="submit">
+            {{ 'BTN.REGISTER' | translate }}
+        </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-3">
+            <div class="divider w-100"></div>
+            <h3 class="text-muted ws-nowrap fw-500 p-2">{{ 'FORMS.LOGIN.LANGUAGE' | translate }}</h3>
+            <div class="divider w-100"></div>
+        </div>
+        <div class="text-center py-3">
+            <button mat-mini-fab color="primary" type="button">
+                Es
+            </button>
+            <button mat-mini-fab color="primary" type="button" class="mx-3">
+                En
+            </button>
+        </div>
+    </form>
+</mat-card>

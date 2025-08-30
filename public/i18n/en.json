@@ -1,0 +1,91 @@
+{
+  "FORMS": {
+    "LOGIN": {
+      "TITLE": "Sign In",
+      "REDIRECT_REGISTER": "Don't have an account? Sign up now!",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "REMEMBER_ME": "Remember me",
+      "FORGOT_PASSWORD": "Forgot password?",
+      "LANGUAGE": "Language"
+    },
+    "REGISTER": {
+      "TITLE": "Register",
+      "REDIRECT_LOGIN": "Already have an account? Sign In",
+      "NAMES": "Name(s)",
+      "FATHER_NAME": "Father's surname",
+      "MOTHER_NAME": "Mother's surname",
+      "BIRTHDAY": "Birthday",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "LANGUAGE": "Language"
+    }
+  },
+  "BTN": {
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "SUBMIT": "Submit",
+    "CANCEL": "Cancel",
+    "UPLOAD": "Upload",
+    "REMOVE": "Remove",
+    "YES": "Yes",
+    "NO": "No",
+    "OK": "OK",
+    "CLEAR": "Clear",
+    "ADVANCED": "Advanced",
+    "HIDE": "Hide"
+  },
+  "VALIDATION": {
+    "REQUIRED": "This field is required.",
+    "INVALID_EMAIL": "Invalid email.",
+    "MIN_LENGTH": "This field must be at least {{min}} characters.",
+    "MAX_LENGTH": "Maximum length is {{max}} characters.",
+    "ALPHABETIC": "This field must contain only letters.",
+    "ALPHANUMERIC": "This field must contain only letters and numbers.",
+    "NUMERIC": "This field must contain only numbers.",
+    "PASSWORD_MISMATCH": "Password do not match.",
+    "INVALID_URL": "Invalid URL.",
+    "INVALID_NUMBER": "Invalid number."
+  },
+  "MESSAGE": {
+    "PAGE_NOT_EXIST": "Opps, it seems that this page does not exist.",
+    "SURE_DELETE": "Are you sure you want to delete?",
+    "FILE_SIZE": "The file size cannot exceed {{param}} kb."
+  },
+  "LOGIN": "Login",
+  "LOGOUT": "Logout",
+  "REGISTER": "Register",
+  "ACCOUNT": "Account",
+  "SUBMIT_PROPERTY": "Submit property",
+  "MENU": "Menu",
+  "MY_PROPERTIES": "My Properties",
+  "FAVORITES": "Favorites",
+  "COMPARE": "Compare",
+  "EDIT_PROFILE": "Edit Profile",
+  "LOCK_SCREEN": "Lock screen",
+  "HELP": "Help",
+  "NAV": {
+    "HOME": "Home",
+    "PROPERTIES": "Properties",
+    "PAGES": "Pages",
+    "AGENTS": "Agents",
+    "AGENT": "Agent",
+    "FAQS": "Faqs",
+    "PRICING": "Pricing",
+    "TERMS_CONDITIONS": "Terms & Conditions",
+    "LANDING": "Landing",
+    "404_PAGE": "404 Page",
+    "OTHERS": "Others",
+    "EXTERNAL_LINK": "External Link",
+    "MENU_ITEM": "Menu Item",
+    "CONTACT": "Contact",
+    "ABOUT_US": "About Us",
+    "ADMIN": "Admin"
+  },
+  "FIELD": {
+    "NAME": "Name"
+  }
+}
