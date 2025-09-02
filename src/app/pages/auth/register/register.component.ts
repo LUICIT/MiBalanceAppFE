@@ -1,88 +1,124 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule, LayoutAlignDirective } from '@ngbracket/ngx-layout';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { TranslatePipe } from '@ngx-translate/core';
-import { matchPassword, validateAlphabetic, validateEmail } from 'ngx-helpers';
+import { LayoutAlignDirective, LayoutDirective } from '@ngbracket/ngx-layout';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { matchPassword, validateAllFormFields, validateAlphabetic, validateEmail } from 'ngx-helpers';
+import { RegisterModel } from '@models/register.model';
+import { lastValueFrom } from 'rxjs';
+import { AuthService } from '@services/web-services/auth.service';
+import { MaterialModule } from '../../../modules/material.module';
 
 @Component({
     selector: 'app-register',
     imports: [
         RouterModule,
         ReactiveFormsModule,
-        MatCardModule,
-        MatInputModule,
-        MatSelectModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSlideToggleModule,
-        FlexLayoutModule,
-        MatSnackBarModule,
-        TranslatePipe,
-        LayoutAlignDirective
+        MaterialModule,
+        LayoutAlignDirective,
+        LayoutDirective,
+        TranslatePipe
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit {
 
-    public registerForm: FormGroup;
-    public hide = true;
+    registerForm: FormGroup;
+
+    disableButton = false;
+    hide = true;
 
     constructor(
+        private readonly translateService: TranslateService,
+        private readonly authService: AuthService,
         private readonly formBuilder: FormBuilder,
+        private readonly snackBar: MatSnackBar,
         private readonly router: Router,
-        private readonly snackBar: MatSnackBar
     ) {
     }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            names: ['Luis Rodrigo', Validators.compose([
+            names: [null, Validators.compose([
                 Validators.required,
                 Validators.maxLength(100),
                 validateAlphabetic
             ])],
-            fatherSurname: ['Aguilar', Validators.compose([
+            fatherSurname: [null, Validators.compose([
                 Validators.required,
                 Validators.maxLength(50),
                 validateAlphabetic
             ])],
-            motherSurname: ['Uribe', [
+            motherSurname: [null, [
                 Validators.maxLength(50),
                 validateAlphabetic
             ]],
-            birthday: ['1991-01-05', Validators.required],
-            email: ['falcon_nike@hotmail.com', Validators.compose([
+            birthday: [null, Validators.required],
+            email: [null, Validators.compose([
                 Validators.required,
                 validateEmail
             ])],
-            password: ['Luicit03', Validators.compose([
+            password: [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(8),
             ])],
-            password_confirmation: ['Luicit03']
+            password_confirmation: [null]
         }, {
             validators: matchPassword
         });
     }
 
-    public onRegisterFormSubmit(): void {
-        if (this.registerForm.valid) {
-            console.log(this.registerForm.value);
-            this.snackBar.open('You registered successfully!', '×', {
-                panelClass: 'success',
-                verticalPosition: 'bottom',
-                duration: 3000
-            });
+    onRegisterFormSubmit(): void {
+        if (this.registerForm.invalid) {
+            validateAllFormFields(this.registerForm);
+            return;
         }
+        this.disableButton = true;
+        const formValue = this.registerForm.value;
+        const registerModel: RegisterModel = {
+            names: formValue.names,
+            father_name: formValue.fatherSurname,
+            mother_name: formValue.motherSurname,
+            birthday: formValue.birthday,
+            email: formValue.email,
+            password: formValue.password,
+            password_confirmation: formValue.password_confirmation
+        }
+
+        lastValueFrom(this.authService.register(registerModel)).then(response => {
+            if (<string>response.data) {
+                this.router.navigate(['login']);
+                this.snackBar.open(<string>response.data, '×', {
+                    panelClass: 'error',
+                    verticalPosition: 'bottom',
+                    duration: 5000
+                });
+                this.disableButton = false;
+            }
+        }).catch(error => {
+            this.disableButton = false;
+            if (error.error.errors) {
+                const firstKey = Object.keys(error.error.errors)[0];
+                this.snackBar.open(error.error.errors[firstKey][0], '×', {
+                    panelClass: 'error',
+                    verticalPosition: 'bottom',
+                    duration: 5000
+                });
+                return;
+            }
+            this.snackBar.open(error.error.message, '×', {
+                panelClass: 'error',
+                verticalPosition: 'bottom',
+                duration: 5000
+            });
+        });
     }
+
+    changeLang(lang: string) {
+        this.translateService.use(lang);
+    }
+
 }
 

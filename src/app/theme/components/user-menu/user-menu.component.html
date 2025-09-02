@@ -1,6 +1,6 @@
-<a mat-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger" [dir]="settings.rtl ? 'rtl' : 'ltr'">
+<a mat-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger" dir="ltr">
     <mat-icon class="mat-icon-sm m-0">person</mat-icon>
-    <span fxShow="false" fxShow.gt-sm class="mx-1 uppercase">{{ 'ACCOUNT' | translate }}</span> 
+    <span fxShow="false" fxShow.gt-sm class="mx-1 uppercase">{{ 'ACCOUNT' | translate }}</span>
     <mat-icon class="mat-icon-sm caret" iconPositionEnd>arrow_drop_down</mat-icon>
 </a>
 <mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-menu-panel user-menu">
@@ -20,21 +20,21 @@
         </a>
         <a mat-menu-item routerLink="/account/favorites"> 
             <mat-icon class="mat-icon-sm">favorite_border</mat-icon>
-            <span [matBadge]="appService.Data.favorites.length" 
+            <!--<span [matBadge]="appService.Data.favorites.length"
                   [matBadgeHidden]="appService.Data.favorites.length == 0"
-                  matBadgeSize="small" 
-                  matBadgeColor="warn" 
+                  matBadgeSize="small"
+                  matBadgeColor="warn"
                   matBadgeOverlap="false"
-                  aria-hidden="false"> {{ 'FAVORITES' | translate }}</span> 
+                  aria-hidden="false"> {{ 'FAVORITES' | translate }}</span> -->
         </a>
         <a mat-menu-item routerLink="/compare"> 
             <mat-icon class="mat-icon-sm">compare_arrows</mat-icon> 
-            <span [matBadge]="appService.Data.compareList.length" 
+            <!--<span [matBadge]="appService.Data.compareList.length"
                   [matBadgeHidden]="appService.Data.compareList.length == 0"
-                  matBadgeSize="small" 
-                  matBadgeColor="warn" 
+                  matBadgeSize="small"
+                  matBadgeColor="warn"
                   matBadgeOverlap="false"
-                  aria-hidden="false">{{ 'COMPARE' | translate }}</span> 
+                  aria-hidden="false">{{ 'COMPARE' | translate }}</span> -->
         </a>
         <!-- <a mat-menu-item routerLink="/"> 
             <mat-icon class="mat-icon-sm">search</mat-icon>

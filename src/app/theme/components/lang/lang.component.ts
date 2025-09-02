@@ -1,56 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { TranslateService } from '@ngx-translate/core';
-import { Settings, SettingsService } from '@services/settings.service';
+import { Settings, SettingsService } from '@services/theme/settings.service';
+import { MaterialModule } from '../../../modules/material.module';
 
 @Component({
     selector: 'app-lang',
     imports: [
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
+        MaterialModule,
         FlexLayoutModule
     ],
     templateUrl: './lang.component.html'
 })
 export class LangComponent implements OnInit {
-  public langName = '';
-  public settings: Settings;
-  constructor(public translateService: TranslateService, public settingsService: SettingsService) { 
-    this.settings = this.settingsService.settings;
-  }
 
-  ngOnInit() {
-    this.langName = this.getLangName(this.translateService.getDefaultLang());
-  }
+    langName = '';
 
-  public changeLang(lang: string) {
-    this.translateService.use(lang);
-    this.langName = this.getLangName(lang);
-  }
+    currentLang: string;
+    settings: Settings;
+    langs: readonly string[];
 
-  public getLangName(lang: string) {
-    if (lang == 'en') {
-      return 'English';
+    constructor(
+        private readonly translateService: TranslateService,
+        private readonly settingsService: SettingsService
+    ) {
+        this.settings = this.settingsService.settings;
+        this.langs = this.translateService.getLangs();
+        this.currentLang = this.translateService.getCurrentLang();
     }
-    else if (lang == 'de') {
-      return 'German';
+
+    ngOnInit() {
+        this.langName = this.getLangName(this.translateService.getCurrentLang());
     }
-    else if (lang == 'fr') {
-      return 'French';
+
+    changeLang(lang: string) {
+        this.translateService.use(lang);
+        this.langName = this.getLangName(lang);
     }
-    else if (lang == 'ru') {
-      return 'Russian';
+
+    getLangName(lang: string) {
+        if (lang == 'es') {
+            return 'Español';
+        } else if (lang == 'en') {
+            return 'English';
+        } else {
+            return 'Español';
+        }
     }
-    else if (lang == 'tr') {
-      return 'Turkish';
-    }
-    else {
-      return 'English';
-    }
-  }
 
 }

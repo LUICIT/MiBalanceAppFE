@@ -1,6 +1,6 @@
 <div id="app"
-     class="app"
-     [ngClass]="[settings.theme, 'toolbar-'+settings.toolbar]"
+     class="app toolbar"
+     [ngClass]="[settings.theme]"
      [class.main-toolbar-fixed]="settings.mainToolbarFixed">
     <router-outlet />
     <ng-progress #progressBar="ngProgress" ngProgressHttp/>

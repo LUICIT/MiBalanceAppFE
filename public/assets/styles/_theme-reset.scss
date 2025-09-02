@@ -61,22 +61,14 @@
         background: mat.m2-get-color-from-palette($primary);
         color: mat.m2-get-color-from-palette($primary, default-contrast);
     }
-    .toolbar-2 #top-toolbar{
-        background-color: mat.m2-get-color-from-palette($background, card);
-        color: mat.m2-get-color-from-palette($foreground, text);
-    }
     #main-toolbar{
         background: mat.m2-get-color-from-palette($background, card);
-    }
-    .toolbar-2 #main-toolbar{
-        background: mat.m2-get-color-from-palette($primary);
-        color: mat.m2-get-color-from-palette($primary, default-contrast);
     }
     header{
         .logo svg{
             fill: mat.m2-get-color-from-palette($primary);
         } 
-        &.toolbar-1{        
+        &.toolbar{
             &.has-bg-image:not(.main-toolbar-fixed), &.has-bg-video:not(.main-toolbar-fixed){
                 .logo svg{
                     fill: #fff;
@@ -94,26 +86,6 @@
                 }
             } 
         }
-        &.toolbar-2{
-            .horizontal-menu{
-                .mat-mdc-button{
-                    color:#fff;
-                    &.horizontal-active-link{
-                        color:#fff;
-                    }                       
-                }
-            }
-            &.has-bg-image:not(.main-toolbar-fixed), &.has-bg-video:not(.main-toolbar-fixed){
-                .horizontal-menu{
-                    .mat-mdc-button{
-                        &.horizontal-active-link{
-                            background: rgba(mat.m2-get-color-from-palette($primary), 0.38);
-                        }                       
-                    }
-                }
-            }  
-            
-        }      
     }
 
     .header-carousel .slide-info .mat-mdc-card{

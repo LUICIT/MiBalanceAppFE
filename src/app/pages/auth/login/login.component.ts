@@ -1,30 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@ngbracket/ngx-layout';
-import { TranslatePipe } from '@ngx-translate/core';
+import { LayoutAlignDirective, LayoutDirective } from '@ngbracket/ngx-layout';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { lastValueFrom } from 'rxjs';
 import { AuthService } from '@services/web-services/auth.service';
 import { CredentialModel } from '@models/credential.model';
+import { validateAllFormFields } from 'ngx-helpers';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '@services/system/user.service';
+import { MaterialModule } from '../../../modules/material.module';
 
 @Component({
     selector: 'app-login',
     imports: [
         ReactiveFormsModule,
         RouterModule,
-        MatCardModule,
-        MatInputModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSlideToggleModule,
-        MatTooltipModule,
-        FlexLayoutModule,
+        MaterialModule,
+        LayoutAlignDirective,
+        LayoutDirective,
         TranslatePipe
     ],
     templateUrl: './login.component.html',
@@ -36,8 +30,11 @@ export class LoginComponent implements OnInit {
     hide = true;
 
     constructor(
+        private readonly translateService: TranslateService,
         private readonly authService: AuthService,
+        private readonly userService: UserService,
         private readonly formBuilder: FormBuilder,
+        private readonly snackBar: MatSnackBar,
         private readonly router: Router
     ) {
     }
@@ -56,7 +53,7 @@ export class LoginComponent implements OnInit {
 
     onLoginFormSubmit(): void {
         if (this.loginForm.invalid) {
-            console.log('Formulario no valido...');
+            validateAllFormFields(this.loginForm);
             return;
         }
         const formValue = this.loginForm.value;
@@ -66,10 +63,26 @@ export class LoginComponent implements OnInit {
             rememberMe: formValue.rememberMe
         }
         lastValueFrom(this.authService.login(credentials)).then(response => {
-            console.log(response);
+            if (this.userService.saveUser(response.user)) {
+                this.router.navigate(['dashboard']);
+                return;
+            }
+            this.snackBar.open('Error al guardar usuario, intente de nuevo', '×', {
+                panelClass: 'error',
+                verticalPosition: 'bottom',
+                duration: 3000
+            });
         }).catch(error => {
-            console.log(error.error);
+            this.snackBar.open(error.error.message, '×', {
+                panelClass: 'error',
+                verticalPosition: 'bottom',
+                duration: 5000
+            });
         });
+    }
+
+    changeLang(lang: string): void {
+        this.translateService.use(lang);
     }
 
 }

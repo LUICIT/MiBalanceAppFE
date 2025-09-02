@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { Menu } from '@models/menu.model';
+import { MenuModel } from '@models/menu.model';
 import { TranslateModule } from '@ngx-translate/core';
-import { MenuService } from '@services/menu.service';
+import { MenuService } from '@services/theme/menu.service';
+import { LayoutAlignDirective, LayoutDirective } from '@ngbracket/ngx-layout';
 
 @Component({
     selector: 'app-vertical-menu',
@@ -12,25 +13,33 @@ import { MenuService } from '@services/menu.service';
         RouterModule,
         TranslateModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        LayoutAlignDirective,
+        LayoutDirective
     ],
     templateUrl: './vertical-menu.component.html',
     styleUrls: ['./vertical-menu.component.scss'],
     providers: [MenuService]
 })
 export class VerticalMenuComponent implements OnInit {
-  @Input('menuParentId') menuParentId: number;
-  public menuItems: Array<Menu>;
-  constructor(public menuService: MenuService) { }
 
-  ngOnInit() {
-    this.menuItems = this.menuService.getVerticalMenuItems();
-    this.menuItems = this.menuItems.filter(item => item.parentId == this.menuParentId);
-  }
+    @Input('menuParentId') menuParentId: number;
 
-  onClick(menuId: number) {
-    this.menuService.toggleMenuItem(menuId);
-    this.menuService.closeOtherSubMenus(this.menuService.getVerticalMenuItems(), menuId);
-  }
+    menuItems: Array<MenuModel>;
+
+    constructor(
+        private readonly menuService: MenuService
+    ) {
+    }
+
+    ngOnInit() {
+        this.menuItems = this.menuService.getVerticalMenuItems();
+        this.menuItems = this.menuItems.filter(item => item.parentId == this.menuParentId);
+    }
+
+    onClick(menuId: number) {
+        this.menuService.toggleMenuItem(menuId);
+        this.menuService.closeOtherSubMenus(this.menuService.getVerticalMenuItems(), menuId);
+    }
 
 }

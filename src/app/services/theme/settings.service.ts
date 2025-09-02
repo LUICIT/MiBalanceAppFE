@@ -5,7 +5,6 @@ export class Settings {
     constructor(
         public name: string,
         public theme: string,
-        public toolbar: number,
         public stickyMenuToolbar: boolean,
         public header: string,
         public searchPanelVariant: number,
@@ -41,7 +40,6 @@ export class SettingsService {
     settings = new Settings(
         'MiBalanceApp',  // theme name
         'red',      // blue, green, red, pink, purple, grey, orange-dark
-        1,           // 1 or 2
         true,        // true = sticky, false = not sticky
         'image',     // default, image, carousel, map, video
         1,           //  1, 2  or 3

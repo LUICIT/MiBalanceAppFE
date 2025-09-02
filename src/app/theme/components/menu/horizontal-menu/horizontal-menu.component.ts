@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core'; 
+import { Component, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
-import { Menu } from '@models/menu.model';
+import { MenuModel } from '@models/menu.model';
 import { TranslateModule } from '@ngx-translate/core';
-import { MenuService } from '@services/menu.service';
+import { MenuService } from '@services/theme/menu.service';
 
 @Component({
     selector: 'app-horizontal-menu',
@@ -21,13 +21,19 @@ import { MenuService } from '@services/menu.service';
     providers: [MenuService]
 })
 export class HorizontalMenuComponent implements OnInit {
-  @Input('menuParentId') menuParentId: number;
-  public menuItems: Array<Menu>;
-  constructor(public menuService: MenuService) { }
 
-  ngOnInit() {
-    this.menuItems = this.menuService.getHorizontalMenuItems();
-    this.menuItems = this.menuItems.filter(item => item.parentId == this.menuParentId);
-  }
+    @Input('menuParentId') menuParentId: number;
+
+    menuItems: Array<MenuModel>;
+
+    constructor(
+        private readonly menuService: MenuService
+    ) {
+    }
+
+    ngOnInit(): void {
+        this.menuItems = this.menuService.getHorizontalMenuItems();
+        this.menuItems = this.menuItems.filter(item => item.parentId == this.menuParentId);
+    }
 
 }
