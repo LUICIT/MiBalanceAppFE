@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlexLayoutModule } from '@ngbracket/ngx-layout';
+import { ShowHideDirective } from '@ngbracket/ngx-layout';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings, SettingsService } from '@services/theme/settings.service';
 import { MaterialModule } from '../../../modules/material.module';
@@ -8,7 +8,7 @@ import { MaterialModule } from '../../../modules/material.module';
     selector: 'app-lang',
     imports: [
         MaterialModule,
-        FlexLayoutModule
+        ShowHideDirective
     ],
     templateUrl: './lang.component.html'
 })

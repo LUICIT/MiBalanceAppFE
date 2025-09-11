@@ -18,6 +18,7 @@
       "BIRTHDAY": "Fecha de nacimiento",
       "EMAIL": "Correo electrónico",
       "PASSWORD": "Contraseña",
+      "CURRENT_PASSWORD": "Contraseña actual",
       "CONFIRM_PASSWORD": "Confirmar contraseña",
       "LANGUAGE": "Idioma"
     }
@@ -25,6 +26,9 @@
   "BTN": {
     "LOGIN": "Iniciar sesión",
     "REGISTER": "Registrarse",
+    "UPDATE_PROFILE": "Actualizar perfil",
+    "SEND_VERIFY": "Enviar verificación",
+    "CHANGE_PASSWORD": "Cambiar contraseña",
     "ADD": "Agregar",
     "SAVE": "Guardar",
     "SUBMIT": "Enviar",
@@ -53,6 +57,18 @@
   "MESSAGE": {
     "PAGE_NOT_EXIST": "Opps, parece que esta página no existe.",
     "SURE_DELETE": "¿Estás seguro de que deseas eliminar?"
+  },
+  "LBL": {
+    "MY_ACCOUNT": "Mi cuenta",
+    "ACCOUNT_DETAILS": "Detalles de la cuenta",
+    "PASSWORD_CHANGE": "Cambio de contraseña"
+  },
+  "MY_ACCOUNT": {
+    "NAVBAR": {
+      "PROFILE": "Mi Perfil",
+      "PROPERTIES": "Mis Propiedades",
+      "FAVORITES": "Mis Favoritos"
+    }
   },
   "LOGIN": "Iniciar sesión",
   "LOGOUT": "Cerrar sesión",

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
             email: ['falcon_nike3@hotmail.com', Validators.compose(
                 [Validators.required, Validators.email]
             )],
-            password: ['Luicit12', Validators.compose(
+            password: ['Luicit03', Validators.compose(
                 [Validators.required, Validators.minLength(8)]
             )],
             rememberMe: false
@@ -64,7 +64,8 @@ export class LoginComponent implements OnInit {
         }
         lastValueFrom(this.authService.login(credentials)).then(response => {
             if (this.userService.saveUser(response.user)) {
-                this.router.navigate(['dashboard']);
+                this.userService.saveToken({access_token: response.access_token, token_type: response.token_type});
+                this.router.navigate(['home']).then(r => r);
                 return;
             }
             this.snackBar.open('Error al guardar usuario, intente de nuevo', '×', {

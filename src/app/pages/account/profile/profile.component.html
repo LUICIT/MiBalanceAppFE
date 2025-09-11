@@ -1,0 +1,142 @@
+<div fxLayout="row wrap">
+    <div fxFlex="100" fxFlex.gt-sm="50" class="p-3">
+        <h2 class="text-muted text-center fw-600 mb-3">{{ 'LBL.ACCOUNT_DETAILS' | translate }}</h2>
+        <form [formGroup]="infoForm">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.NAMES' | translate }}</mat-label>
+                <input matInput formControlName="names" required>
+                <mat-error>
+                    @if (infoForm.controls.names.errors?.required) {
+                        {{ 'VALIDATION.REQUIRED' | translate }}
+                    }
+                    @if (infoForm.controls.names.hasError('maxLength')) {
+                        {{ 'VALIDATION.MAX_LENGTH' | translate:{max: 100} }}
+                    }
+                    @if (infoForm.controls.names.hasError('validateAlphabetic')) {
+                        {{ 'VALIDATION.ALPHABETIC' | translate }}
+                    }
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.FATHER_NAME' | translate }}</mat-label>
+                <input matInput formControlName="fatherSurname" required>
+                <mat-error>
+                    @if (infoForm.controls.fatherSurname.errors?.required) {
+                        {{ 'VALIDATION.REQUIRED' | translate }}
+                    }
+                    @if (infoForm.controls.fatherSurname.hasError('maxLength')) {
+                        {{ 'VALIDATION.MAX_LENGTH' | translate:{max: 50} }}
+                    }
+                    @if (infoForm.controls.fatherSurname.hasError('validateAlphabetic')) {
+                        {{ 'VALIDATION.ALPHABETIC' | translate }}
+                    }
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.MOTHER_NAME' | translate }}</mat-label>
+                <input matInput formControlName="motherSurname">
+                <mat-error>
+                    @if (infoForm.controls.motherSurname.hasError('maxLength')) {
+                        {{ 'VALIDATION.MAX_LENGTH' | translate:{max: 50} }}
+                    }
+                    @if (infoForm.controls.motherSurname.hasError('validateAlphabetic')) {
+                        {{ 'VALIDATION.ALPHABETIC' | translate }}
+                    }
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.BIRTHDAY' | translate }}</mat-label>
+                <input matInput formControlName="birthday" required>
+                <mat-error>
+                    @if (infoForm.controls.birthday.errors?.required) {
+                        {{ 'VALIDATION.REQUIRED' | translate }}
+                    }
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">email</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.EMAIL' | translate }}</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error>
+                    @if (infoForm.controls.email.errors?.required) {
+                        {{ 'VALIDATION.REQUIRED' | translate }}
+                    }
+                    @if (infoForm.controls.email.hasError('invalidEmail')) {
+                        Invalid email address
+                    }
+                </mat-error>
+            </mat-form-field>
+
+            <!--<div class="mb-3">
+                <input-file placeholder="Image (or link to image)" formControlName="image" [fileLimit]="1" fileAccept="image/*" [linkEnabled]="true"></input-file>
+            </div>-->
+
+            <div class="text-center mt-2">
+                <button mat-raised-button color="primary" type="submit" class="uppercase" (click)="onInfoFormSubmit()">{{ 'BTN.UPDATE_PROFILE' | translate }}</button>
+                <button mat-raised-button [fxShow]="mustVerifyEmail" color="primary" class="uppercase ml-2" (click)="onSendVerifyEmail()">{{ 'BTN.SEND_VERIFY' | translate }}</button>
+            </div>
+        </form>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-sm="50" class="p-3" ngClass.sm="mt-2" ngClass.xs="mt-2">
+        <h2 class="text-muted text-center fw-600 mb-3">{{ 'LBL.PASSWORD_CHANGE' | translate }}</h2>
+        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordFormSubmit()">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.CURRENT_PASSWORD' | translate }}</mat-label>
+                <input matInput formControlName="currentPassword" type="password" minlength="8" required
+                       [type]="hideCurrentPass ? 'password' : 'text'">
+                <mat-error>
+                    @if (passwordForm.controls.currentPassword.errors?.required) {
+                        {{ 'VALIDATION.REQUIRED' | translate }}
+                    }
+                    @if (passwordForm.controls.currentPassword.hasError('minlength')) {
+                        {{ 'VALIDATION.MIN_LENGTH' | translate:{min: 8} }}
+                    }
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hideCurrentPass = !hideCurrentPass" type="button" class="text-muted">
+                    <mat-icon>{{ hideCurrentPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.PASSWORD' | translate }}</mat-label>
+                <input matInput formControlName="password" type="password" minlength="8" required
+                       [type]="hideNewPass ? 'password' : 'text'">
+                <mat-error>
+                    @if (passwordForm.controls.password.errors?.required) {
+                        {{ 'VALIDATION.REQUIRED' | translate }}
+                    }
+                    @if (passwordForm.controls.password.hasError('minlength')) {
+                        {{ 'VALIDATION.MIN_LENGTH' | translate:{min: 8} }}
+                    }
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hideNewPass = !hideNewPass" type="button" class="text-muted">
+                    <mat-icon>{{ hideNewPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                <mat-label>{{ 'FORMS.REGISTER.CONFIRM_PASSWORD' | translate }}</mat-label>
+                <input matInput formControlName="password_confirmation" type="password" required
+                       [type]="hideNewPass ? 'password' : 'text'">
+                <mat-error>
+                    @if (passwordForm.controls.password_confirmation.hasError('matchPassword')) {
+                        {{ 'VALIDATION.PASSWORD_MISMATCH' | translate }}
+                    }
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hideNewPass = !hideNewPass" type="button" class="text-muted">
+                    <mat-icon>{{ hideNewPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </mat-form-field>
+            <div class="text-center mt-2">
+                <button mat-raised-button color="primary" type="submit" class="uppercase">{{ 'BTN.CHANGE_PASSWORD' | translate }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+

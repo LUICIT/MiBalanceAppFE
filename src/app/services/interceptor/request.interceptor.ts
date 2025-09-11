@@ -1,17 +1,20 @@
 import { HttpEvent, HttpInterceptorFn } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserModel } from "@models/user.model";
+import { TokenModel } from "@models/token.model";
 
 export const requestInterceptor: HttpInterceptorFn = (req, next): Observable<HttpEvent<unknown>> => {
-  const token = localStorage.getItem('token'); // Cambia 'token' por la clave que uses
 
-  const setHeaders: Record<string, string> = {
-    'Accept': 'application/json'
-  };
+    const tokenModel: TokenModel = JSON.parse(localStorage.getItem('tokenUser')) as TokenModel;
 
-  if (token) {
-    setHeaders['Authorization'] = `Bearer ${token}`;
-  }
+    const setHeaders: Record<string, string> = {
+        'Accept': 'application/json'
+    };
 
-  const cloned = req.clone({ setHeaders });
-  return next(cloned);
+    if (tokenModel) {
+        setHeaders['Authorization'] = `${ tokenModel.token_type } ${ tokenModel.access_token }`;
+    }
+
+    const cloned = req.clone({setHeaders});
+    return next(cloned);
 };

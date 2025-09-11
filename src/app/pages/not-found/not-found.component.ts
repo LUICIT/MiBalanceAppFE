@@ -33,7 +33,7 @@ export class NotFoundComponent implements AfterViewInit {
     }
 
     goHome(): void {
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then(r => r);
     }
 
 }

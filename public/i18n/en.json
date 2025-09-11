@@ -18,6 +18,7 @@
       "BIRTHDAY": "Birthday",
       "EMAIL": "Email",
       "PASSWORD": "Password",
+      "CURRENT_PASSWORD": "Current Password",
       "CONFIRM_PASSWORD": "Confirm Password",
       "LANGUAGE": "Language"
     }
@@ -25,6 +26,9 @@
   "BTN": {
     "LOGIN": "Login",
     "REGISTER": "Register",
+    "UPDATE_PROFILE": "Update profile",
+    "SEND_VERIFY": "Send verification",
+    "CHANGE_PASSWORD": "Change password",
     "ADD": "Add",
     "SAVE": "Save",
     "SUBMIT": "Submit",
@@ -54,6 +58,18 @@
     "PAGE_NOT_EXIST": "Opps, it seems that this page does not exist.",
     "SURE_DELETE": "Are you sure you want to delete?",
     "FILE_SIZE": "The file size cannot exceed {{param}} kb."
+  },
+  "LBL": {
+    "MY_ACCOUNT": "My Account",
+    "ACCOUNT_DETAILS": "Account details",
+    "PASSWORD_CHANGE": "Password change"
+  },
+  "MY_ACCOUNT": {
+    "NAVBAR": {
+      "PROFILE": "Profile",
+      "PROPERTIES": "My Properties",
+      "FAVORITES": "Favorites"
+    }
   },
   "LOGIN": "Login",
   "LOGOUT": "Logout",

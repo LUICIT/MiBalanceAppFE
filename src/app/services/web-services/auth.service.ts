@@ -32,4 +32,11 @@ export class AuthService {
         );
     }
 
+    sendVerify(): Observable<ResponseModel<string>> {
+        return this.httpClient.post<ResponseModel<string>>(
+            this.apiRest + 'email/verification-notification',
+            null
+        );
+    }
+
 }

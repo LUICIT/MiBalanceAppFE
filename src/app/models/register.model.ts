@@ -1,7 +1,7 @@
 export class RegisterModel {
     names: string;
-    father_name: string;
-    mother_name?: string;
+    father_surname: string;
+    mother_surname?: string;
     birthday: string;
     email: string;
     password: string;

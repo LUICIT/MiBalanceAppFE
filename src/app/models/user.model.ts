@@ -1,8 +1,8 @@
 export class UserModel {
     id: number;
     names: string;
-    father_name: string;
-    mother_name: string;
-    birthdate: Date;
+    father_surname: string;
+    mother_surname: string;
+    birthday: Date;
     email: string;
 }

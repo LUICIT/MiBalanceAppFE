@@ -1,25 +1,21 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatBadgeModule } from '@angular/material/badge';
-import { FlexLayoutModule } from '@ngbracket/ngx-layout';
+import { LayoutAlignDirective, LayoutDirective, ShowHideDirective } from '@ngbracket/ngx-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { BidiModule } from '@angular/cdk/bidi';
 import { Settings, SettingsService } from '@services/theme/settings.service';
+import { MaterialModule } from "../../../modules/material.module";
 
 @Component({
     selector: 'app-user-menu',
     imports: [
         RouterModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatBadgeModule,
-        FlexLayoutModule,
+        LayoutAlignDirective,
+        LayoutDirective,
+        ShowHideDirective,
+        MaterialModule,
         TranslateModule,
-        BidiModule
+        BidiModule,
     ],
     templateUrl: './user-menu.component.html'
 })

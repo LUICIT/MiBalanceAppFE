@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UserModel } from '@models/user.model';
+import { TokenModel } from "@models/token.model";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,12 @@ export class UserService {
         const storedUser = this.getUser();
         if (storedUser) {
             this.user.next(storedUser);
+        }
+    }
+
+    saveToken(tokenModel: TokenModel | null): void {
+        if (tokenModel) {
+            localStorage.setItem('tokenUser', JSON.stringify(tokenModel));
         }
     }
 

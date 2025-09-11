@@ -5,20 +5,22 @@ import { LogoComponent } from '../logo/logo.component';
 import { HorizontalMenuComponent } from '../menu/horizontal-menu/horizontal-menu.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@ngbracket/ngx-layout';
+import { LayoutAlignDirective, LayoutDirective, ShowHideDirective } from '@ngbracket/ngx-layout';
 import { MaterialModule } from '../../../modules/material.module';
 
 @Component({
     selector: 'app-toolbar',
     imports: [
-        FlexLayoutModule,
         RouterModule,
+        LayoutDirective,
+        LayoutAlignDirective,
+        ShowHideDirective,
         MaterialModule,
         TranslateModule,
         LangComponent,
         UserMenuComponent,
         LogoComponent,
-        HorizontalMenuComponent
+        HorizontalMenuComponent,
     ],
     templateUrl: './toolbar.component.html'
 })

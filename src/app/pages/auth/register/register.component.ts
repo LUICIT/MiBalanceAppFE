@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
-import { LayoutAlignDirective, LayoutDirective } from '@ngbracket/ngx-layout';
+import {FlexDirective, LayoutAlignDirective, LayoutDirective} from '@ngbracket/ngx-layout';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { matchPassword, validateAllFormFields, validateAlphabetic, validateEmail } from 'ngx-helpers';
 import { RegisterModel } from '@models/register.model';
@@ -18,6 +18,7 @@ import { MaterialModule } from '../../../modules/material.module';
         MaterialModule,
         LayoutAlignDirective,
         LayoutDirective,
+        FlexDirective,
         TranslatePipe
     ],
     templateUrl: './register.component.html',
@@ -79,8 +80,8 @@ export class RegisterComponent implements OnInit {
         const formValue = this.registerForm.value;
         const registerModel: RegisterModel = {
             names: formValue.names,
-            father_name: formValue.fatherSurname,
-            mother_name: formValue.motherSurname,
+            father_surname: formValue.fatherSurname,
+            mother_surname: formValue.motherSurname,
             birthday: formValue.birthday,
             email: formValue.email,
             password: formValue.password,
@@ -89,7 +90,7 @@ export class RegisterComponent implements OnInit {
 
         lastValueFrom(this.authService.register(registerModel)).then(response => {
             if (<string>response.data) {
-                this.router.navigate(['login']);
+                this.router.navigate(['login']).then(r => r);
                 this.snackBar.open(<string>response.data, '×', {
                     panelClass: 'error',
                     verticalPosition: 'bottom',

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PublicComponent } from '@layouts/public/public.component';
 import { AuthComponent } from '@layouts/auth/auth.component';
 import { authenticatedGuard } from '@services/guards/authenticated.guard';
+import {loginGuard} from "@services/guards/login.guard";
 
 export const routes: Routes = [
     {
@@ -11,6 +12,7 @@ export const routes: Routes = [
     {
         path: '',
         component: PublicComponent,
+        canActivate: [loginGuard],
         children: [
             {
                 path: 'login',
@@ -25,11 +27,15 @@ export const routes: Routes = [
     {
         path: '',
         component: AuthComponent,
-        // canActivate: [authenticatedGuard],
+        canActivate: [authenticatedGuard],
         children: [
             {
+                path: 'account',
+                loadChildren: () => import('./account/account.routes').then(p => p.routes)
+            },
+            {
                 path: 'home',
-                loadComponent: () => import('./dashboard/dashboard.component').then(c => c.DashboardComponent)
+                loadComponent: () => import('./home/home.component').then(c => c.HomeComponent)
             },
         ]
     }

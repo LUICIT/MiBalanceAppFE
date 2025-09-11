@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { FlexDirective, FlexLayoutModule, LayoutAlignDirective, LayoutDirective } from '@ngbracket/ngx-layout';
-import { FormsModule } from '@angular/forms';
-import { NgScrollbarModule } from 'ngx-scrollbar';
-import { Settings, SettingsService } from '@services/theme/settings.service';
-import { DomHandlerService } from '@services/theme/dom-handler.service';
-import { MaterialModule } from '../../modules/material.module';
-import { ToolbarComponent } from '../../theme/components/toolbar/toolbar.component';
-import { VerticalMenuComponent } from '../../theme/components/menu/vertical-menu/vertical-menu.component';
-import { FooterComponent } from '../../theme/components/footer/footer.component';
+import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {NavigationEnd, Router, RouterModule} from '@angular/router';
+import {FlexDirective, LayoutAlignDirective, LayoutDirective} from '@ngbracket/ngx-layout';
+import {FormsModule} from '@angular/forms';
+import {NgScrollbarModule} from 'ngx-scrollbar';
+import {Settings, SettingsService} from '@services/theme/settings.service';
+import {DomHandlerService} from '@services/theme/dom-handler.service';
+import {MaterialModule} from '../../modules/material.module';
+import {ToolbarComponent} from '../../theme/components/toolbar/toolbar.component';
+import {VerticalMenuComponent} from '../../theme/components/menu/vertical-menu/vertical-menu.component';
+import {FooterComponent} from '../../theme/components/footer/footer.component';
 
 @Component({
     selector: 'app-auth',
@@ -109,7 +109,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
     chooseHeaderType() {
         this.settings.header = this.headerTypeOption;
         this.domHandlerService.winScroll(0, 0);
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then(r => r);
     }
 
     chooseSearchPanelVariant() {
