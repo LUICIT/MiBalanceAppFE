@@ -1,13 +1,13 @@
-import {CanActivateFn, Router} from '@angular/router';
-import {inject} from "@angular/core";
-import {UserService} from "@services/system/user.service";
+import { CanActivateFn, Router } from '@angular/router';
+import { inject } from "@angular/core";
+import { UserModel } from "@models/user.model";
 
 export const loginGuard: CanActivateFn = (route, state) => {
     const router = inject(Router);
-    const userService = inject(UserService);
 
     try {
-        if (userService.getUser()) {
+        const userStr = JSON.parse(localStorage.getItem('currentUser')) as UserModel;
+        if (userStr) {
             router.navigate(['home']);
             return false;
         }

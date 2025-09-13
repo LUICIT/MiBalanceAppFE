@@ -56,6 +56,15 @@ function getDutchPaginatorIntl() {
 
 @Injectable()
 export class AppDateAdapter extends NativeDateAdapter {
+    fullMonth = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    shortMonth = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+    override getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+        if (style === 'long') return this.fullMonth;
+        if (style === 'short') return this.shortMonth;
+        return this.fullMonth.map(m => m.charAt(0));
+    }
+
     override parse(value: any): Date | null {
         if ((typeof value === 'string') && (value.indexOf('/') > -1)) {
             const str = value.split('/');
@@ -69,15 +78,15 @@ export class AppDateAdapter extends NativeDateAdapter {
     }
 
     override format(date: Date, displayFormat: string): string {
-        if (displayFormat == 'input') {
-            let day = date.getDate();
-            let month = date.getMonth() + 1;
-            let year = date.getFullYear();
-            return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
-        } else if (displayFormat == 'inputMonth') {
-            let month = date.getMonth() + 1;
-            let year = date.getFullYear();
-            return this._to2digit(month) + '/' + year;
+        if (displayFormat === 'input') {
+            const day = date.getDate();
+            const monthIndex = date.getMonth();
+            const year = date.getFullYear();
+            return this._to2digit(day) + ' / ' + this.fullMonth[monthIndex] + ' / ' + year;
+        } else if (displayFormat === 'inputMonth') {
+            const monthIndex = date.getMonth();
+            const year = date.getFullYear();
+            return this.shortMonth[monthIndex] + ' / ' + year;
         } else {
             return date.toDateString();
         }

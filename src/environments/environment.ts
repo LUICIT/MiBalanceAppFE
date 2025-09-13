@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://mibalanceappbe.test/api/'
+  baseUrl: 'https://mibalanceappbe.test/'
 };

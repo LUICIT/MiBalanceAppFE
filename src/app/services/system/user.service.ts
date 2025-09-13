@@ -11,9 +11,11 @@ export class UserService {
     user = new BehaviorSubject<UserModel | null>(null);
 
     constructor() {
-        const storedUser = this.getUser();
-        if (storedUser) {
-            this.user.next(storedUser);
+        try {
+            const userStr = JSON.parse(localStorage.getItem('currentUser')) as UserModel;
+            this.user.next(userStr);
+        } catch {
+            this.user.next(null);
         }
     }
 
@@ -30,18 +32,6 @@ export class UserService {
             return true;
         }
         return false;
-    }
-
-    getUser(): UserModel | null {
-        const userStr = localStorage.getItem('currentUser');
-        if (userStr) {
-            try {
-                return JSON.parse(userStr) as UserModel;
-            } catch {
-                return null;
-            }
-        }
-        return null;
     }
 
     clearUser(): void {

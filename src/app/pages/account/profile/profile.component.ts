@@ -49,6 +49,7 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.infoForm = this.formBuilder.group({
+            id: [null, Validators.required],
             names: [null, Validators.compose([
                 Validators.required,
                 Validators.maxLength(100),
@@ -67,7 +68,8 @@ export class ProfileComponent implements OnInit {
             email: [null, Validators.compose([
                 Validators.required,
                 validateEmail
-            ])]
+            ])],
+            image: [null]
         });
         this.passwordForm = this.formBuilder.group({
             currentPassword: ['', Validators.required],
@@ -114,10 +116,14 @@ export class ProfileComponent implements OnInit {
             father_surname: formValue.fatherSurname,
             mother_surname: formValue.motherSurname,
             birthday: formValue.birthday,
-            email: formValue.email
+            email: formValue.email,
+            avatar_path: formValue.image?.[0].file,
         }
-
-        lastValueFrom(this.profileService.update(user)).then(response => {
+        const formData = new FormData();
+        Object.entries(user).forEach(([k, v]) => {
+            if (v != null) formData.append(k, v);
+        });
+        lastValueFrom(this.profileService.update(formData)).then(response => {
             this.userService.saveUser(response.data);
             this.loadProfile();
 
@@ -149,11 +155,12 @@ export class ProfileComponent implements OnInit {
 
     private completeForm(): void {
         this.infoForm.patchValue({
+            id: this.user.id,
             names: this.user.names,
             fatherSurname: this.user.father_surname,
             motherSurname: this.user.mother_surname,
             birthday: this.user.birthday,
-            email: this.user.email,
+            email: this.user.email
         });
     }
 

@@ -8,9 +8,8 @@ import {
     Output,
     ViewChild
     } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { defaultSettings } from '../../settings/default.settings';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { InputFile } from '../../interfaces/input-file';
 import { InputFileRejected } from '../../interfaces/input-file-rejected';
 import { InputFileRejectedReason } from '../../enums/input-file-rejected-reason';
@@ -32,6 +31,7 @@ import { urlValidator } from '../../validators/url.validator';
     standalone: false
 })
 export class InputFileComponent implements ControlValueAccessor, OnInit {
+
     static nextId = 0;
     private _classAnimation: string;
     private _fileAccept: string;
@@ -144,8 +144,8 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
     }
 
     constructor(
-        private formBuilder: FormBuilder,
-        private inputFileService: InputFileService
+        private readonly formBuilder: FormBuilder,
+        private readonly inputFileService: InputFileService
     ) { }
 
     /**
@@ -293,7 +293,7 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
     /**
      * Whether the file can be added to the model.
      * @param files
-     * @param file,
+     * @param file
      * @param bypassLimit
      */
     private fileGuard(files: Array<InputFile>, file: InputFile, bypassLimit?: boolean): boolean {
@@ -302,12 +302,12 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
             return false;
         }
 
-        if (!this.inputFileService.sizeGuard(file.file!, this.sizeLimit)) {
+        if (!this.inputFileService.sizeGuard(file.file, this.sizeLimit)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.sizeReached, file });
             return false;
         }
 
-        if (!this.inputFileService.typeGuard(file.file!, this.fileAccept)) {
+        if (!this.inputFileService.typeGuard(file.file, this.fileAccept)) {
             this.rejectedFile.emit({ reason: InputFileRejectedReason.badFile, file });
             return false;
         }
@@ -320,12 +320,12 @@ export class InputFileComponent implements ControlValueAccessor, OnInit {
      */
     private setFilePreview(): void {
         for (const index in this.files) {
-            if (this.files[index].file != null && this.inputFileService.typeGuard(this.files[index].file!, 'image/*')) {
+            if (this.files[index].file != null && this.inputFileService.typeGuard(this.files[index].file, 'image/*')) {
                 const fr = new FileReader();
                 fr.onload = () => {
                     this.files[index].preview = fr.result!;
                 };
-                fr.readAsDataURL(this.files[index].file!);
+                fr.readAsDataURL(this.files[index].file);
             }
         }
     }

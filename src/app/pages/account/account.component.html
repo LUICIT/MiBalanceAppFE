@@ -7,7 +7,7 @@
                         <mat-icon>close</mat-icon>
                     </button>
                     <mat-card-header fxLayoutAlign="start center">
-                        <img mat-card-avatar src="images/others/user.jpg" alt="avatar" class="mb-0">
+                        <img mat-card-avatar [src]="imageProfile" alt="avatar" class="mb-0">
                         <mat-card-title class="text-muted mb-0">{{ `${user.names} ${user.father_surname} ${user.mother_surname}` }}</mat-card-title>
                     </mat-card-header>
                     <div class="divider my-3"></div>

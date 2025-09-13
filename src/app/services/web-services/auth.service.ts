@@ -11,7 +11,7 @@ import { RegisterModel } from '@models/register.model';
 })
 export class AuthService {
 
-    apiRest = `${environment.baseUrl}v1/auth/`;
+    apiRest = `${environment.baseUrl}api/v1/auth/`;
 
     constructor(
         private readonly httpClient: HttpClient
@@ -22,6 +22,20 @@ export class AuthService {
         return this.httpClient.post<ResponseModel>(
             this.apiRest + 'login',
             model
+        );
+    }
+
+    logout(): Observable<ResponseModel<string>> {
+        return this.httpClient.post<ResponseModel<string>>(
+            this.apiRest + 'logout',
+            null
+        );
+    }
+
+    logoutAll(): Observable<ResponseModel<string>> {
+        return this.httpClient.post<ResponseModel<string>>(
+            this.apiRest + 'logoutAll',
+            null
         );
     }
 

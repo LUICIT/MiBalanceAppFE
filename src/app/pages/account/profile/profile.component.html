@@ -48,9 +48,11 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
-                <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+                <mat-icon matPrefix class="mr-1 text-muted">cake</mat-icon>
                 <mat-label>{{ 'FORMS.REGISTER.BIRTHDAY' | translate }}</mat-label>
-                <input matInput formControlName="birthday" required>
+                <input matInput formControlName="birthday" [matDatepicker]="picker" required (click)="picker.open()">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
                 <mat-error>
                     @if (infoForm.controls.birthday.errors?.required) {
                         {{ 'VALIDATION.REQUIRED' | translate }}
@@ -71,9 +73,9 @@
                 </mat-error>
             </mat-form-field>
 
-            <!--<div class="mb-3">
-                <input-file placeholder="Image (or link to image)" formControlName="image" [fileLimit]="1" fileAccept="image/*" [linkEnabled]="true"></input-file>
-            </div>-->
+            <div class="mb-3">
+                <input-file formControlName="image" [fileLimit]="1" fileAccept="image/*" [linkEnabled]="true"></input-file>
+            </div>
 
             <div class="text-center mt-2">
                 <button mat-raised-button color="primary" type="submit" class="uppercase" (click)="onInfoFormSubmit()">{{ 'BTN.UPDATE_PROFILE' | translate }}</button>

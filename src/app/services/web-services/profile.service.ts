@@ -10,7 +10,7 @@ import { UserModel } from "@models/user.model";
 })
 export class ProfileService {
 
-    apiRest = `${ environment.baseUrl }v1/settings/`;
+    apiRest = `${ environment.baseUrl }api/v1/settings/`;
 
     constructor(
         private readonly httpClient: HttpClient
@@ -23,10 +23,10 @@ export class ProfileService {
         );
     }
 
-    update(userModel: UserModel): Observable<ResponseModel<UserModel>> {
-        return this.httpClient.put<ResponseModel<UserModel>>(
+    update(formData: FormData): Observable<ResponseModel<UserModel>> {
+        return this.httpClient.post<ResponseModel<UserModel>>(
             this.apiRest + 'profile',
-            userModel
+            formData
         );
     }
 
